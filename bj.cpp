@@ -174,7 +174,7 @@ int getHandValue(vector<Card>& hand){
 //     return false;
 //   }
 // }
-int aceCheck(vector<Card>& hand){
+bool aceCheck(vector<Card>& hand){
 // dealer checks hand, if it is a soft ace hand will hit over 17.
   if( hand.size() < 1 || hand.empty() ) {
     cout << "Hand is Empty!";
@@ -192,7 +192,10 @@ int aceCheck(vector<Card>& hand){
   if(acesDetected > 0){
     if((value +  10) <= 21){
       value += 10;
-      return true
+      return true;
+    }
+    else{
+      return false;
     }
     }
   else{
@@ -242,7 +245,7 @@ int main(){
     }
 
     // PLAYER TURN
-    while ( (!playerBust || !playerEndTurn) && !dealerBust){
+    while ( (!playerBust && !playerEndTurn) && !dealerBust){
       cout << "Your Hand Value is: " << getHandValue(playerHand) << "\n";
       cout << "Would you like to hit? Y/N: ";
       string hit;
@@ -280,12 +283,17 @@ int main(){
       // show all dealer's cards
       // card 0 is now shown since it was "flipped over"
       // on the dealer's turn
+      dealerSoftAce = aceCheck(dealerHand);
       if( getHandValue(dealerHand) > 21 ) {
         cout << "Dealer Busts!";
         dealerBust = true;
         dealerTurn = false;
         break;
       }
+    }
+    else{
+      dealerTurn = false;
+      break;
     }
   }
   // END DEALER TURN
