@@ -154,6 +154,29 @@ int getHandValue(vector<Card>& hand){
   return value;
 }
 
+bool aceCheck(vector<Card>& hand){
+  // dealer checks hand, if it is a soft ace hand will hit over 17.
+  if( hand.size() < 1 || hand.empty() ) {
+    cout << "Hand is Empty!";
+    return false;
+  }
+  int nCols = hand.size();
+  int acesDetected = 0;
+  for(int i = 0; i < nCols; ++i){
+    if(hand[i].rank == Rank::Ace){
+      acesDetected += 1;
+    }
+  }
+  if(acesDetected > 0){
+      return true;
+    }
+  else{
+    return false;
+  }
+}
+
+
+
 int main(){
     #ifdef _WIN32
     SetConsoleOutputCP(CP_UTF8); // use UTF-8 if using windows!
@@ -172,18 +195,93 @@ int main(){
     shuffleDeck(deck);
     std::this_thread::sleep_for(std::chrono::milliseconds(78)); // wait a bit before shuffling our final time
     shuffleDeck(deck);
+    shuffleDeck(deck);
     vector<Card> playerHand;
     vector<Card> dealerHand;
     playerHand = dealCard(deck, playerHand);
     dealerHand = dealCard(deck, dealerHand);
     playerHand = dealCard(deck, playerHand);
     dealerHand = dealCard(deck, dealerHand);
-    cout << "Dealer Shows: " << dealerHand[0] << "\n";
+    cout << "Dealer Shows: " << dealerHand[1] << "\n"; // shows the dealers second card
     cout << "You Have:\n";
     printDeck(playerHand);
     cout << "\n";
-    cout << getHandValue(playerHand) << "\n";
-    
+    //cout << getHandValue(playerHand) << "\n";
+    bool playerBust = false;
+    bool dealerBust = false;
+    bool playerEndTurn = false;
+    bool dealerTurn = false;
+    bool dealerSoftAce = false;
+    if( getHandValue(dealerHand) > 21 ){
+      dealerBust = true; // nothin happens yet because the player cannot see the dealer's hand
+      // also I am fairly certain (99.99% sure) this condition can NEVER fire, it is just in case
+    }
+
+    // PLAYER TURN
+    while ( (!playerBust || !playerEndTurn) && !dealerBust){
+      cout << "Your Hand Value is: " << getHandValue(playerHand) << "\n";
+      cout << "Would you like to hit? Y/N: ";
+      cin >> hit;
+      if((hit == "Y") || (hit == "y")){
+        playerHand = dealCard(deck, playerHand);
+        cout << "You Now Have: \n";
+        printDeck(playerHand);
+        if( getHandValue(playerHand) > 21){
+          playerBust = true;
+          //cout << "Player Busts!";
+          break;
+        }
+        break;
+      }
+      else{
+        playerEndTurn = true;
+      }
+    }
+  //END PLAYER TURN
+
+  // DEALER TURN
+  dealerTurn = true;
+  dealerSoftAce = aceCheck(dealerHand);
+  cout << "Dealer Flips Their First Card! It is: " << dealerHand[0] << "\n";
+  cout << "Dealer's Hand Value is: " << getHandValue(dealerHand) << "\n";
+  while(dealerTurn){
+    // dealer stands on 17+, hits on a soft 17, stands on soft 18+
+    // only take turn if the player hasn't busted!
+    if( !playerBust && !dealerBust && ( (!dealerSoftAce && getHandValue(dealerHand) < 17) || (dealerSoftAce && getHandValue(dealerHand) <= 17 ) ){
+      cout << "Dealer Hits\n";
+      dealerHand = dealCard(deck, dealerHand);
+      cout << "Dealer Showing: \n";
+      printDeck(dealerHand);
+      // show all dealer's cards
+      // card 0 is now shown since it was "flipped over"
+      // on the dealer's turn
+      if( getHandValue(dealerHand) > 21 ) {
+        cout << "Dealer Busts!";
+        dealerBust = true;
+        dealerTurn = false;
+        break;
+      }
+      break;
+    }
+    else{
+      dealerTurn = false;
+      break;
+    }
+  }
+  // END DEALER TURN
+  if( dealerBust && !playerBust ){
+    cout << "You win!\n";
+  }
+  else if ( !dealerBust && playerBust ){
+    cout << "You Lose, Dealer Wins!\n";
+  }
+  else if ( getHandValue(playerHand) > getHandValue(dealerHand){
+    cout << "You Win!\n";
+  }
+  else if ( getHandValue(playerHand) <= getHandValue(dealerHand){
+    cout << "You Loose! Dealer Wins!\n"; // dealer wins all ties
+  }
+  return 0;
   }
   
 
