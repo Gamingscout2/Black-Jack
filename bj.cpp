@@ -17,8 +17,8 @@ enum class Rank { Ace=1, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, J
 
 
 struct Card {
-  Suit Suit;
-  Rank Rank;
+  Suit suit;
+  Rank rank;
 };
 
 vector<Card> createDeck(){
