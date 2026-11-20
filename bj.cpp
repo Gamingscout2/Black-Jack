@@ -128,10 +128,9 @@ vector<Card> dealCard( vector<Card>& deck, vector<Card> hand ){
     playerHand = dealCard(deck, playerHand);
     dealerHand = dealCard(deck, dealerHand);
     cout << "Dealer Shows: " << dealerHand[0] << "\n";
-    cout << "You Have: ";
+    cout << "You Have:\n";
     printDeck(playerHand);
     cout << "\n";
-    
     
   }
   
