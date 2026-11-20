@@ -154,26 +154,6 @@ int getHandValue(vector<Card>& hand){
   return value;
 }
 
-// bool aceCheck(vector<Card>& hand){
-//   // dealer checks hand, if it is a soft ace hand will hit over 17.
-//   if( hand.size() < 1 || hand.empty() ) {
-//     cout << "Hand is Empty!";
-//     return false;
-//   }
-//   int nCols = hand.size();
-//   int acesDetected = 0;
-//   for(int i = 0; i < nCols; ++i){
-//     if(hand[i].rank == Rank::Ace){
-//       acesDetected += 1;
-//     }
-//   }
-//   if(acesDetected > 0){
-//       return true;
-//     }
-//   else{
-//     return false;
-//   }
-// }
 bool aceCheck(vector<Card>& hand){
 // dealer checks hand, if it is a soft ace hand will hit over 17.
   if( hand.size() < 1 || hand.empty() ) {
@@ -246,6 +226,7 @@ int main(){
 
     // PLAYER TURN
     while ( (!playerBust && !playerEndTurn) && !dealerBust){
+      cout << "\n";
       cout << "Your Hand Value is: " << getHandValue(playerHand) << "\n";
       cout << "Would you like to hit? Y/N: ";
       string hit;
@@ -276,6 +257,7 @@ int main(){
     // dealer stands on 17+, hits on a soft 17, stands on soft 18+
     // only take turn if the player hasn't busted!
     if( !playerBust && !dealerBust && ( (!dealerSoftAce && getHandValue(dealerHand) < 17) || (dealerSoftAce && getHandValue(dealerHand) <= 17 ) ) ){
+      cout << "\n";
       cout << "Dealer Hits\n";
       dealerHand = dealCard(deck, dealerHand);
       cout << "Dealer Showing: \n";
