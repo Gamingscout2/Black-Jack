@@ -92,7 +92,7 @@ void shuffleDeck( vector<Card>& deck ){
 }
 
 vector<Card> dealCard( vector<Card>& deck, vector<Card> hand ){
-  if( deck.size() < 2 || deck[0].empty ){
+  if( deck.size() < 2 || deck[0].empty() ){
     cout << "Deck is Empty!";
     return;
   }
