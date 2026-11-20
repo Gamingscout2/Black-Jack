@@ -140,7 +140,7 @@ int getHandValue(vector<Card>& hand){
   int nCols = hand.size();
   int value = 0;
   int acesDetected = 0;
-  for(i = 0, i < nCols, ++i){
+  for(int i = 0, i < nCols, ++i){
     if(hand[i] == "Ace"){
       acesDetected += 1;
     }
