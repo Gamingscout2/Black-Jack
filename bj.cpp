@@ -277,7 +277,7 @@ int main(){
   else if ( getHandValue(playerHand) > getHandValue(dealerHand) ){
     cout << "You Win!\n";
   }
-  else if ( getHandValue(playerHand) <= getHandValue(dealerHand){
+  else if ( getHandValue(playerHand) <= getHandValue(dealerHand) ){
     cout << "You Loose! Dealer Wins!\n"; // dealer wins all ties
   }
   return 0;
