@@ -297,6 +297,9 @@ int main(){
     }
   }
   // END DEALER TURN
+  cout << "\n";
+  cout << "Your Hand Value: " << getHandValue(playerHand) << "\n";
+  cout << "Dealer's Hand Value: " << getHandValue(dealerHand) << "\n";
   if( dealerBust && !playerBust ){
     cout << "You win!\n";
   }
@@ -306,8 +309,11 @@ int main(){
   else if ( getHandValue(playerHand) > getHandValue(dealerHand) ){
     cout << "You Win!\n";
   }
-  else if ( getHandValue(playerHand) <= getHandValue(dealerHand) ){
-    cout << "You Lose! Dealer Wins!\n"; // dealer wins all ties
+  else if ( getHandValue(playerHand) < getHandValue(dealerHand) ){
+    cout << "You Lose! Dealer Wins!\n"; 
+  }
+  else if ( getHandValue(playerHand) == getHandValue(dealerHand) ){
+    cout << "Tie! All bets returned.\n"; // handle returned bets!
   }
   return 0;
   }
