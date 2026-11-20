@@ -39,6 +39,10 @@ std::mt19937 getRandGen(){
 
 // 1. Convert Suit to a readable string
 std::string suitToString(Suit s) { 
+    const std::string spade   = "\u2660"; 
+    const std::string heart   = "\u2665"; 
+    const std::string diamond = "\u2666"; 
+    const std::string club    = "\u2663"; 
     switch (s) {
         case Suit::Spades:   return "Spades " + spade;
         case Suit::Diamonds: return "Diamonds " + diamond;
