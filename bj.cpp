@@ -236,6 +236,7 @@ int main(){
       }
       else{
         playerEndTurn = true;
+        break;
       }
     }
   //END PLAYER TURN
