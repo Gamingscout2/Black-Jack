@@ -29,7 +29,7 @@ vector <vector<string>> createDeckDynamic(){
 }
 
 void printDeck( const vector<vector<string>>& deck ){
-    if(deck.empty() ){ return 0; }
+    if(deck.empty() ){ cout << 0 << " Deck Empty\n"; }
     size_t nRows = deck.size();
     size_t nCols = deck[0].size();
     for(size_t col = 0; col < nCols; ++col){
@@ -39,7 +39,7 @@ void printDeck( const vector<vector<string>>& deck ){
 
 
   int main(){
-    deck = createDeckDynamic();
+    vector<vector<string>> deck = createDeckDynamic();
     printDeck(deck);
   }
   
