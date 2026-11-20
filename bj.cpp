@@ -103,7 +103,58 @@ vector<Card> dealCard( vector<Card>& deck, vector<Card> hand ){
   return hand;
 }
 
-  int main(){
+int getCardValue(Card card){
+  int cardRank = static_cast<int>(card.rank);
+  int result;
+  switch(cardRank){
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+    case 9:
+    case 10:
+      result = cardRank;
+      break;
+    case 11:
+      result = 10;
+      break;
+    case 12:
+      result = 10;
+      break;
+    case 13:
+      result = 10;
+      break;
+  }
+  return result;
+}
+
+int getHandValue(vector<Card>& hand){
+  if( hand.size() < 1 || hand.empty() ) {
+    cout << "Hand is Empty!";
+    return 0;
+  }
+  int nCols = hand.size();
+  int value = 0;
+  int acesDetected = 0;
+  for(i = 0, i < nCols, ++i){
+    if(hand[i] == "Ace"){
+      acesDetected += 1;
+    }
+    value += getCardValue(hand[i]);
+  }
+  if(acesDetected > 0){
+    if((value +  10) <= 21){
+      value += 10;
+    }
+    }
+  return value;
+}
+
+int main(){
     #ifdef _WIN32
     SetConsoleOutputCP(CP_UTF8); // use UTF-8 if using windows!
     #endif
