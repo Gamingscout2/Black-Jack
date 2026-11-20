@@ -33,18 +33,6 @@ vector <vector<string>> createDeckDynamic(){
   return deck;
 }
 
-int64_t getUnixTime(){
-  // return Unix timestamp, agnostic of the OS
-  // no longer used
-  using namespace std::chrono;
-  const auto now = system_clock::now(); // get current system time
-  //int64_t seconds = duration_cast<std::chrono::seconds>(now.time_since_epoch()).count();
-  int64_t milliseconds = duration_cast<std::chrono::milliseconds>(now.time_since_epoch()).count();
-  // return the milliseconds since 1970 for random number generation!
-  return milliseconds;
-}
-
-
 std::mt19937 getRandGen(){
   std::random_device rd;
   return std::mt19937(rd()); // get a seed
@@ -67,6 +55,10 @@ void printDeck( const vector<vector<string>>& deck ){
 }
 
 vector <vector<string>> shuffleDeck( vector<vector<string>> deck ){
+  if( deck.size() < 2 || deck[0].empty() ){
+    cout << "Deck is Empty!\n"
+    return {};
+  }
  
   int numCards = deck[0].size();
   // Fisher-Yates shuffle algorithm
@@ -92,7 +84,7 @@ vector <vector<string>> shuffleDeck( vector<vector<string>> deck ){
     //cout << getRandInt() << "\n";
     cout << "shuffle 1\n";
     vector<vector<string>> deck2 = shuffleDeck(deck);
-    cout << printDeck(deck2) << "\n";
+    printDeck(deck2);
     
   }
   
