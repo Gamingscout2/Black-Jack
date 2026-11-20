@@ -26,6 +26,7 @@ vector <vector<string>> createDeckDynamic(){
     }
   }
   return deck;
+}
 
 void printDeck( const vector<vector<string>>& deck ){
     if deck.empty(){ return 0; }
