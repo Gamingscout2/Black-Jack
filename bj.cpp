@@ -4,6 +4,8 @@
 #include <chrono>
 #include <cstdint>
 #include <random>
+#include <cmath>
+#include <thread>
 using namespace std;
 
 vector<vector<string>> createDeckStatic(){
@@ -33,6 +35,7 @@ vector <vector<string>> createDeckDynamic(){
 
 int64_t getUnixTime(){
   // return Unix timestamp, agnostic of the OS
+  // no longer used
   using namespace std::chrono;
   const auto now = system_clock::now(); // get current system time
   //int64_t seconds = duration_cast<std::chrono::seconds>(now.time_since_epoch()).count();
@@ -42,44 +45,18 @@ int64_t getUnixTime(){
 }
 
 int64_t getRandInt(){
-  int64_t time = getUnixTime(); // store current time in ms
   std::random_device rd;
   static std::mt19937 gen(rd()); // one-time seed
-  std::uniform_int_distribution<int64_t> dist(1, 500); // store a modifier value
-  modifier = dist(gen);
-
-  std::uniform_int_distribution<int64_t> dist1(1, 6); // dice roll modifier
-  operand = dist1(gen); // this determines what operation to do to the random numbers!
-
-  switch(operand) {
-    case 1:
-      int64_t resultA = time / modifier;
-      int64_t resultB = modifier + resultA;
-      return resultB;
-    case 2:
-      int64_t resultA = time + modifier;
-      int64_t resultB = resultA / modifier;
-      return resultB;
-    case 3:
-      int64_t resultA = modifier / time;
-      int64_t resultB = time * resultA;
-      int64_t resultC = resultB + modifier;
-      return resultC;
-    case 4:
-      int64_t resultA = time / modifier;
-      int64_t resultB = resultA * operand;
-      int64_t resultC = resultB + resultA;
-      return resultC;
-    case 5:
-      int64_t resultA = modifier * ((time / operand) / operand);
-      int64_t resultB = resultA + (modifier * ((operand * resultA) / modifier);
-      return resultB;
-  }
-  
+  std::uniform_int_distribution<int64_t> dist(1, 9223372036854775807); // random up to 64 bit signed limit
+  int64_t result = dist(gen);
+  return result;
 }
 
 void printDeck( const vector<vector<string>>& deck ){
-  if(deck.empty() ){ cout << 0 << " Deck Empty\n"; } // do not print if deck is empty!
+  if(deck.empty() ){ 
+    cout << 0 << " Deck Empty\n"; 
+    return;
+  } // do not print if deck is empty!
   size_t nRows = deck.size(); // represent size in bytes, unsigned int type size_t
   size_t nCols = deck[0].size();
   for(size_t col = 0; col < nCols; ++col){
@@ -89,6 +66,7 @@ void printDeck( const vector<vector<string>>& deck ){
 }
 
 vector<vector<string>> shuffleDeck( const vector<vector<string>>& deck ){
+  return;
   
 }
 
@@ -97,6 +75,9 @@ vector<vector<string>> shuffleDeck( const vector<vector<string>>& deck ){
     vector<vector<string>> deck = createDeckDynamic();
     //printDeck(deck); // Don't need to print the deck now that we know it works! Re-use printDeck for hands as well.
     cout << "Welcome to C++ Black Jack, by Pheadra Parsons!";
+    cout << getRandInt();
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+    cout << getRandInt();
     
   }
   
