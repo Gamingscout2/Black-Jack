@@ -57,7 +57,7 @@ void printDeck( const vector<vector<string>>& deck ){
     cout << 0 << " Deck Empty\n"; 
     return;
   } // do not print if deck is empty!
-  size_t nRows = deck.size(); // represent size in bytes, unsigned int type size_t
+  size_t nRows = deck.size(); // represent number of elements, unsigned int type size_t
   size_t nCols = deck[0].size();
   for(size_t col = 0; col < nCols; ++col){
     // iterate through the coloumns and print the cards!
