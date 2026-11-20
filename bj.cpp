@@ -232,7 +232,6 @@ int main(){
           //cout << "Player Busts!";
           break;
         }
-        break;
       }
       else{
         playerEndTurn = true;
@@ -263,10 +262,7 @@ int main(){
         dealerTurn = false;
         break;
       }
-      break;
     }
-    dealerTurn = false;
-    break;
   }
   // END DEALER TURN
   if( dealerBust && !playerBust ){
