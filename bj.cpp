@@ -66,7 +66,7 @@ void printDeck( const vector<vector<string>>& deck ){
 }
 
 vector<vector<string>> shuffleDeck( const vector<vector<string>>& deck ){
-  return;
+  return {};
   
 }
 
@@ -75,9 +75,9 @@ vector<vector<string>> shuffleDeck( const vector<vector<string>>& deck ){
     vector<vector<string>> deck = createDeckDynamic();
     //printDeck(deck); // Don't need to print the deck now that we know it works! Re-use printDeck for hands as well.
     cout << "Welcome to C++ Black Jack, by Pheadra Parsons!";
-    cout << getRandInt();
+    cout << getRandInt() << "\n";
     std::this_thread::sleep_for(std::chrono::seconds(1));
-    cout << getRandInt();
+    cout << getRandInt() << "\n";
     
   }
   
