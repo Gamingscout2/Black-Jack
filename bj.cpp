@@ -56,7 +56,7 @@ void printDeck( const vector<vector<string>>& deck ){
 
 vector <vector<string>> shuffleDeck( vector<vector<string>> deck ){
   if( deck.size() < 2 || deck[0].empty() ){
-    cout << "Deck is Empty!\n"
+    cout << "Deck is Empty!\n";
     return {};
   }
  
