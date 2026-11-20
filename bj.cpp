@@ -92,9 +92,9 @@ void shuffleDeck( vector<Card>& deck ){
 }
 
 vector<Card> dealCard( vector<Card>& deck, vector<Card> hand ){
-  if( deck.size() < 2 || deck[0].empty() ){
+  if( deck.size() < 1 || deck.empty() ){
     cout << "Deck is Empty!";
-    return;
+    return hand;
   }
   // deal a card
   Card theCard = deck.front();
@@ -128,7 +128,9 @@ vector<Card> dealCard( vector<Card>& deck, vector<Card> hand ){
     playerHand = dealCard(deck, playerHand);
     dealerHand = dealCard(deck, dealerHand);
     cout << "Dealer Shows: " << dealerHand[0] << "\n";
-    cout << "You Have: " << printDeck(playerHand) << "\n";
+    cout << "You Have: ";
+    printDeck(playerHand);
+    cout << "\n";
     
     
   }
