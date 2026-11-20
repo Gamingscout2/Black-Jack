@@ -74,7 +74,7 @@ vector<vector<string>> shuffleDeck( const vector<vector<string>>& deck ){
   int main(){
     vector<vector<string>> deck = createDeckDynamic();
     //printDeck(deck); // Don't need to print the deck now that we know it works! Re-use printDeck for hands as well.
-    cout << "Welcome to C++ Black Jack, by Pheadra Parsons!";
+    cout << "Welcome to C++ Black Jack, by Pheadra Parsons!\n";
     cout << getRandInt() << "\n";
     std::this_thread::sleep_for(std::chrono::seconds(1));
     cout << getRandInt() << "\n";
