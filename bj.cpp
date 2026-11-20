@@ -27,19 +27,20 @@ vector <vector<string>> createDeckDynamic(){
   }
   return deck;
 
-  void printDeck( const vector<vector<string>>& deck ){
+void printDeck( const vector<vector<string>>& deck ){
     if deck.empty(){ return 0; }
     size_t nRows = deck.size();
     size_t nCols = deck[0].size();
     for(size_t col = 0; col < numCols; ++col){
-
+        cout << deck[0][col] << "of"<<  deck[1][col] << "\n";
     }
+    return 0;
   }
 
 
   int main(){
     deck = createDeckDynamic();
-    
+    printDeck(deck);
   }
   
 }
