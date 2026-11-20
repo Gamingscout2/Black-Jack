@@ -141,7 +141,7 @@ int getHandValue(vector<Card>& hand){
   int value = 0;
   int acesDetected = 0;
   for(int i = 0; i < nCols; ++i){
-    if(hand[i] == "Ace"){
+    if(hand[i].rank == Ace){
       acesDetected += 1;
     }
     value += getCardValue(hand[i]);
