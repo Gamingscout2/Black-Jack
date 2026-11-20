@@ -4,8 +4,8 @@
 #include <chrono>
 #include <cstdint>
 #include <random>
-#include <cmath>
 #include <thread>
+#include <utility>
 using namespace std;
 
 vector<vector<string>> createDeckStatic(){
@@ -44,12 +44,13 @@ int64_t getUnixTime(){
   return milliseconds;
 }
 
-int64_t getRandInt(){
+
+std::mt19937 getRandGen(){
   std::random_device rd;
-  static std::mt19937 gen(rd()); // one-time seed
-  std::uniform_int_distribution<int64_t> dist(1, 9223372036854775807); // random up to 64 bit signed limit
-  int64_t result = dist(gen);
-  return result;
+  return std::mt19937(rd()); // get a seed
+  //std::uniform_int_distribution<int64_t> dist(1, 9223372036854775807); // random up to 64 bit signed limit
+  //int64_t result = dist(gen);
+  //return result;
 }
 
 void printDeck( const vector<vector<string>>& deck ){
@@ -65,19 +66,32 @@ void printDeck( const vector<vector<string>>& deck ){
   }
 }
 
-vector<vector<string>> shuffleDeck( const vector<vector<string>>& deck ){
-  return {};
+vector <vector<string>> shuffleDeck( vector<vector<string>> deck ){
+  std::m19937 gen = getRandGen();
+  int numCards = deck[0].size();
+  // Fisher-Yates shuffle algorithm
+  for (int i = numCards - 1; i > 0; --i) {
+        std::uniform_int_distribution<int> dist(0, i);
+        int j = dist(gen);
+        // Swap BOTH row 0 (value) and row 1 (suit) at the same column indices
+        std::swap(deck[0][i], deck[0][j]);
+        std::swap(deck[1][i], deck[1][j]);
+    }
+  return deck;
   
 }
 
 
   int main(){
     vector<vector<string>> deck = createDeckDynamic();
-    //printDeck(deck); // Don't need to print the deck now that we know it works! Re-use printDeck for hands as well.
+    printDeck(deck); // Don't need to print the deck now that we know it works! Re-use printDeck for hands as well.
     cout << "Welcome to C++ Black Jack, by Pheadra Parsons!\n";
-    cout << getRandInt() << "\n";
-    std::this_thread::sleep_for(std::chrono::seconds(1));
-    cout << getRandInt() << "\n";
+    //cout << getRandInt() << "\n";
+    //std::this_thread::sleep_for(std::chrono::seconds(1));
+    //cout << getRandInt() << "\n";
+    cout << "shuffle 1\n";
+    vector<vector<string>> deck2 = shuffleDeck(deck);
+    cout << printDeck(deck2) << "\n";
     
   }
   
