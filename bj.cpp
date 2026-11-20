@@ -182,7 +182,7 @@ int main(){
     cout << "You Have:\n";
     printDeck(playerHand);
     cout << "\n";
-    cout << getHandValue(playerHand);
+    cout << getHandValue(playerHand) << "\n";
     
   }
   
