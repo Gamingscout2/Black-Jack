@@ -17,13 +17,15 @@ vector <vector<string>> createDeckDynamic(){
   // dynamically generate the deck so that we don't need to check our static list by hand
   vector<string> suits = { "Spades", "Diamonds", "Clubs", "Hearts"  }; // this way the loop can call 0-3 and append them into the second dimension
   vector<string> values = { "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King" }; // 13 card values, 4 suits
-  vector<vector<string>> deck(2, vector<string>(52));
+  vector<vector<string>> deck(2); // initialize with 2 empty rows instead
 
-  for(i = 0, i < 4, i++){
-    for(j = 0, j < 14, j++){
-      
+  for(int i = 0; i < 4; i++){
+    for(int j = 0; j < 13; j++){
+      deck[0].push_back(values[j]);
+      deck[1].push_back(suits[i]);
     }
   }
+  return deck;
   
 }
 
