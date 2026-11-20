@@ -221,6 +221,7 @@ int main(){
     while ( (!playerBust || !playerEndTurn) && !dealerBust){
       cout << "Your Hand Value is: " << getHandValue(playerHand) << "\n";
       cout << "Would you like to hit? Y/N: ";
+      string hit;
       cin >> hit;
       if((hit == "Y") || (hit == "y")){
         playerHand = dealCard(deck, playerHand);
@@ -247,7 +248,7 @@ int main(){
   while(dealerTurn){
     // dealer stands on 17+, hits on a soft 17, stands on soft 18+
     // only take turn if the player hasn't busted!
-    if( !playerBust && !dealerBust && ( (!dealerSoftAce && getHandValue(dealerHand) < 17) || (dealerSoftAce && getHandValue(dealerHand) <= 17 ) ){
+    if( !playerBust && !dealerBust && ( (!dealerSoftAce && getHandValue(dealerHand) < 17) || (dealerSoftAce && getHandValue(dealerHand) <= 17 ) ) ){
       cout << "Dealer Hits\n";
       dealerHand = dealCard(deck, dealerHand);
       cout << "Dealer Showing: \n";
@@ -263,10 +264,8 @@ int main(){
       }
       break;
     }
-    else{
-      dealerTurn = false;
-      break;
-    }
+    dealerTurn = false;
+    break;
   }
   // END DEALER TURN
   if( dealerBust && !playerBust ){
@@ -275,7 +274,7 @@ int main(){
   else if ( !dealerBust && playerBust ){
     cout << "You Lose, Dealer Wins!\n";
   }
-  else if ( getHandValue(playerHand) > getHandValue(dealerHand){
+  else if ( getHandValue(playerHand) > getHandValue(dealerHand) ){
     cout << "You Win!\n";
   }
   else if ( getHandValue(playerHand) <= getHandValue(dealerHand){
