@@ -67,10 +67,11 @@ void printDeck( const vector<vector<string>>& deck ){
 }
 
 vector <vector<string>> shuffleDeck( vector<vector<string>> deck ){
-  std::m19937 gen = getRandGen();
+ 
   int numCards = deck[0].size();
   // Fisher-Yates shuffle algorithm
   for (int i = numCards - 1; i > 0; --i) {
+        std::mt19937 gen = getRandGen();
         std::uniform_int_distribution<int> dist(0, i);
         int j = dist(gen);
         // Swap BOTH row 0 (value) and row 1 (suit) at the same column indices
