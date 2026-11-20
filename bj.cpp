@@ -87,9 +87,10 @@ void printDeck(const std::vector<Card>& deck) {
     }
 }
 
-vector<Card> shuffleDeck( vector<Card> deck){
+void shuffleDeck( vector<Card>& deck){
   std::mt19937 gen = getRandGen();
   std::shuffle(deck.begin(), deck.end(), gen);
+  //return deck;
 }
 
   int main(){
@@ -108,8 +109,8 @@ vector<Card> shuffleDeck( vector<Card> deck){
     //std::this_thread::sleep_for(std::chrono::seconds(1));
     //cout << getRandInt() << "\n";
     cout << "shuffle 1\n";
-    vector<card> deck2 = shuffleDeck(deck);
-    printDeck(deck2);
+    shuffleDeck(deck);
+    printDeck(deck);
     
   }
   
