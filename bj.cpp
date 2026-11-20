@@ -26,6 +26,21 @@ vector <vector<string>> createDeckDynamic(){
     }
   }
   return deck;
+
+  void printDeck( const vector<vector<string>>& deck ){
+    if deck.empty(){ return 0; }
+    size_t nRows = deck.size();
+    size_t nCols = deck[0].size();
+    for(size_t col = 0; col < numCols; ++col){
+
+    }
+  }
+
+
+  int main(){
+    deck = createDeckDynamic();
+    
+  }
   
 }
 
