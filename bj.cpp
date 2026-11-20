@@ -154,27 +154,51 @@ int getHandValue(vector<Card>& hand){
   return value;
 }
 
-bool aceCheck(vector<Card>& hand){
-  // dealer checks hand, if it is a soft ace hand will hit over 17.
+// bool aceCheck(vector<Card>& hand){
+//   // dealer checks hand, if it is a soft ace hand will hit over 17.
+//   if( hand.size() < 1 || hand.empty() ) {
+//     cout << "Hand is Empty!";
+//     return false;
+//   }
+//   int nCols = hand.size();
+//   int acesDetected = 0;
+//   for(int i = 0; i < nCols; ++i){
+//     if(hand[i].rank == Rank::Ace){
+//       acesDetected += 1;
+//     }
+//   }
+//   if(acesDetected > 0){
+//       return true;
+//     }
+//   else{
+//     return false;
+//   }
+// }
+int aceCheck(vector<Card>& hand){
+// dealer checks hand, if it is a soft ace hand will hit over 17.
   if( hand.size() < 1 || hand.empty() ) {
     cout << "Hand is Empty!";
-    return false;
+    return 0;
   }
   int nCols = hand.size();
+  int value = 0;
   int acesDetected = 0;
   for(int i = 0; i < nCols; ++i){
     if(hand[i].rank == Rank::Ace){
       acesDetected += 1;
     }
+    value += getCardValue(hand[i]);
   }
   if(acesDetected > 0){
-      return true;
+    if((value +  10) <= 21){
+      value += 10;
+      return true
+    }
     }
   else{
     return false;
   }
 }
-
 
 
 int main(){
@@ -275,7 +299,7 @@ int main(){
     cout << "You Win!\n";
   }
   else if ( getHandValue(playerHand) <= getHandValue(dealerHand) ){
-    cout << "You Loose! Dealer Wins!\n"; // dealer wins all ties
+    cout << "You Lose! Dealer Wins!\n"; // dealer wins all ties
   }
   return 0;
   }
